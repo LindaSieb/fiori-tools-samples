@@ -1,32 +1,54 @@
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/fiori-tools-samples)](https://api.reuse.software/info/github.com/SAP-samples/fiori-tools-samples)
+# Getting Started
+Build and deploy a CAP Project API with a Fiori Elements UI and a managed approuter configuration hosted on SAP Business Technology Platform (BTP)
 
-# Samples for SAP Fiori tools
+## Prerequisites
+These are only required if deploying to Cloud Foundry (CF)
+- You’ll need an SAP Cloud Platform trial [account](https://account.hana.ondemand.com/)
+- You are subscribed to the [Launchpad Service](https://developers.sap.com/tutorials/cp-portal-cloud-foundry-getting-started.html)
+- Create an [SAP HANA Cloud Service instance](https://developers.sap.com/tutorials/btp-app-hana-cloud-setup.html#08480ec0-ac70-4d47-a759-dc5cb0eb1d58) or use an existing one
 
-### Description
-This project contains sample SAP Fiori elements projects built using SAP Fiori tools. These sample projects will be primarily referenced from blogs and tutorials grouped in folders according to application scenario.
+### Running on SAP Business Application Studio (SBAS)
+- Create a [dev workspace](https://help.sap.com/viewer/c2b99f19e9264c4d9ae9221b22f6f589/2021_3_QRC/en-US/f728966223894cc28be3ca2ee60ee784.html) using a `Full Stack Cloud Application`
 
-### Requirements
-1. Node.js based on your platform - [download Node.js](https://nodejs.org/en/download/).
+## Setup and Run Locally
+- Open a terminal window and run `npm ci`
+- Bind and publish to your [HANA Cloud Service instance](https://developers.sap.com/tutorials/hana-cloud-create-db-project.html)
+- Run `cds watch` to build and start your application
+- Select `Open in New Tab` when prompted, a new browser tab should open
+- Select your Fiori web application or select the `Books` service endpoint
 
-### Download and Installation
+## Build and Deploy to CF
+Option 1 - Using [Cloud MTA Build Tool](https://github.com/SAP/cloud-mta-build-tool)
+- If you've made any changes, right-click `mta.yaml` and select `Build MTA Project`
+- Right-click `mta_archives -> managedAppCAPProject_1.0.0.mtar` and select `Deploy MTA Archive`
+- This will prompt you for your CF details if you are not already logged in
+- Your CAP Project will be successfully deployed to CF
 
-1. Clone the repository or download it to your file system.
-2. From the terminal, go to a sample app/project (as instructed in the referencing tutorials) e.g. `V2/apps/products-review`.
-3. Type `npm install` to install all the dependencies.
-4. Type `npm start` to host the sample SAP Fiori elements application locally. 
-- To view the application with mock data, click on the `URL`.
-- To use the associated mock OData service, combine values of `URL` and `Service Path`.
+Option 2 - Using cli
+- Run the following command;
+```shell
+npm run build && npm run deploy
+```
+- This will prompt you for your CF details if you are not already logged in
+- Your CAP Project will be successfully deployed to CF
 
-![example](V2/apps/images/products-review-run.png)
+## Verify Deployment
+- Option 1 - Open a new terminal window and run, selecting the URL generated;
+```shell
+cf html5-list -u -di managedAppCAPProject-destination-service -u --runtime launchpad
+```
+- Option 2 - Using SAP BTP Cockpit, login to your SAP BTP subaccount, select `HTML5 Applications` from the left navigation tab and select your new Fiori application
 
-E.g. From the above example, combining both the values gives you `http://localhost:8083/sap/opu/odata/sap/SEPMRA_PROD_MAN`
+## Undeploy
+No longer want your CAP project hosted on SAP BTP, run the following command;
+```shell
+npm run undeploy
+```
 
-### Known Issues
-There are no known issues relating to the resources included in this repository. Please refer to **How to obtain support** for any issue you encounter.
+## Get Support
 
-### How to Obtain Support
-- Option 1 : Users can log in and [submit their question](https://answers.sap.com/questions/ask.html) in the **SAP Community**. Please select the tag "SAP Fiori tools".
-- Option 2 : Use this option ONLY when you encounter any issues using the sample project with [SAP Developer tutorials](https://developers.sap.com/group.fiori-tools-lrop.html), please report it [here](https://github.com/SAPDocuments/Tutorials/issues/new).
+In case you've a question, find a bug, or otherwise need support, use the [SAP Community](https://answers.sap.com/tags/9f13aee1-834c-4105-8e43-ee442775e5ce) to get more visibility.
 
-### License
-Copyright (c) 2009-2020 SAP SE or an SAP affiliate company. This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](/LICENSES/Apache-2.0.txt) file.
+## License
+
+Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.
