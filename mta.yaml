@@ -129,7 +129,7 @@ resources:
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
-  appname: mycapproject-unique
+  appname: cicd-cap-project
 build-parameters:
   before-all:
   - builder: custom

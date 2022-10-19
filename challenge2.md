@@ -28,7 +28,7 @@ There are a number of MTA changes required to support xsuaa, open `mta.yaml` and
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
-  appname: mycapproject-unique
+  appname: cicd-cap-project
 ```
 - Change 2 - update the `managedAppCAPProject-srv` module to support authentication by adding `uaa_managedAppCAPProject` and removing the reference to `srv-api` by switching to the static URL using `host`, as shown;
 ```yaml
